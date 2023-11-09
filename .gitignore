@@ -1,160 +1,177 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+import telebot
+from telebot import types
 
-# C extensions
-*.so
+bot = telebot.TeleBot('6633327118:AAEVLpdw8V8FNXiBfHT0CBvPi_mKGeW51_Y')
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+@bot.message_handler(commands=['start'])
+def start(message):
+    
+    markup = types.InlineKeyboardMarkup()
+    markup.add(types.InlineKeyboardButton('Расписание уроков', callback_data='openurok'))
+    markup.add(types.InlineKeyboardButton('Список учителей',callback_data='openspisok'))
+    markup.add(types.InlineKeyboardButton('Кабинеты', callback_data= 'cab'))
+    
+    bot.reply_to(message, 'Привет, я всезнайка 11 И, я знаю практически все. Я самая классная девчонка!!! Могу помочь с различными вопросами.', reply_markup=markup)
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
 
-# Translations
-*.mo
-*.pot
+@bot.callback_query_handler(func=lambda callback: True)
+def call(callback):
+    if callback.data == 'openurok':
+        markup1 = types.InlineKeyboardMarkup()
+        markup1.add(types.InlineKeyboardButton('Понедельник', callback_data='pon'))
+        markup1.add(types.InlineKeyboardButton('Вторник', callback_data='vto'))
+        markup1.add(types.InlineKeyboardButton('Среда', callback_data='sre'))
+        markup1.add(types.InlineKeyboardButton('Четверг', callback_data='cht'))
+        markup1.add(types.InlineKeyboardButton('Пятница', callback_data='pyat'))
+        bot.send_message(callback.message.chat.id, 'Выберите день недели', reply_markup=markup1)
+    elif callback.data == 'openspisok':
+        markup2 = types.InlineKeyboardMarkup()
+        button1 = (types.InlineKeyboardButton('Английский язык', callback_data='angl1'))
+        button2 = (types.InlineKeyboardButton('Астрономия', callback_data='astr1'))
+        button3 = (types.InlineKeyboardButton('Биология', callback_data='bio1'))
+        markup2.row(button1, button2,button3)
+        button4 = (types.InlineKeyboardButton('География', callback_data='geo1'))
+        button5 = (types.InlineKeyboardButton('Индивидуальный проект', callback_data='ip1'))
+        button6 = (types.InlineKeyboardButton('Информатика', callback_data='infa1'))
+        markup2.row(button4,button5,button6)
+        button7 = (types.InlineKeyboardButton('История', callback_data='history1'))
+        button8 = (types.InlineKeyboardButton('Литература', callback_data='litra1'))
+        button9 = (types.InlineKeyboardButton('Математика', callback_data='math1'))
+        markup2.row(button7,button8,button9)
+        button10 =(types.InlineKeyboardButton('Обществознание', callback_data='obsch1'))
+        button11 = (types.InlineKeyboardButton('ОБЖ', callback_data='obzh1'))
+        button12 = (types.InlineKeyboardButton('Право', callback_data='pravo1'))
+        markup2.row(button10,button11,button12)
+        button13 = (types.InlineKeyboardButton('Родной язык(русский)', callback_data='yazik1'))
+        button14 = (types.InlineKeyboardButton('Русский язык', callback_data='russki1'))
+        button15 = (types.InlineKeyboardButton('Физика', callback_data='physics1'))
+        markup2.row(button13,button14,button15)
+        button16 = (types.InlineKeyboardButton('Физическая культура', callback_data='fizra1'))
+        button17 = (types.InlineKeyboardButton('Химия', callback_data='chemistry1'))
+        button18 = (types.InlineKeyboardButton('Экономика', callback_data='eco1'))
+        markup2.row(button16,button17,button18)
+        bot.send_message(callback.message.chat.id, 'Выберите нужный вам предмет', reply_markup= markup2)
+    elif callback.data == 'cab':
+        markup3 = types.InlineKeyboardMarkup()
+        button1 = (types.InlineKeyboardButton('Английский язык', callback_data='angl2'))
+        button2 = (types.InlineKeyboardButton('Астрономия', callback_data='astr2'))
+        button3 = (types.InlineKeyboardButton('Биология', callback_data='bio2'))
+        markup3.row(button1,button2,button3)
+        button4 = (types.InlineKeyboardButton('География', callback_data='geo2'))
+        button5 = (types.InlineKeyboardButton('Индивидуальный проект', callback_data='ip2'))
+        button6 = (types.InlineKeyboardButton('Информатика', callback_data='infa2'))
+        markup3.row(button4,button5,button6)
+        button7 = (types.InlineKeyboardButton('История', callback_data='history2'))
+        button8 = (types.InlineKeyboardButton('Литература', callback_data='litra2'))
+        button9 = (types.InlineKeyboardButton('Математика', callback_data='math2'))
+        markup3.row(button7,button8,button9)
+        button10 = (types.InlineKeyboardButton('Обществознание', callback_data='obsch2'))
+        button11 = (types.InlineKeyboardButton('ОБЖ', callback_data='obzh2'))
+        button12 = (types.InlineKeyboardButton('Право', callback_data='pravo2'))
+        markup3.row(button10,button11,button12)
+        button13 = (types.InlineKeyboardButton('Родной язык(русский)', callback_data='yazik2'))
+        button14 = (types.InlineKeyboardButton('Русский язык', callback_data='russki2'))
+        button15 = (types.InlineKeyboardButton('Физика', callback_data='physics2'))
+        markup3.row(button13,button14,button15)
+        button16 = (types.InlineKeyboardButton('Физическая культура', callback_data='fizra2'))
+        button17 = (types.InlineKeyboardButton('Химия', callback_data='chemistry2'))
+        button18 = (types.InlineKeyboardButton('Экономика', callback_data='eco2'))
+        markup3.row(button16,button17,button18)
+        bot.send_message(callback.message.chat.id, 'Выберите предмет для того, чтобы узнать в какой кабинет вам идти', reply_markup=markup3)
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+@bot.callback_query_handler(func = lambda message: True)
+def main(message):
+    if message.data == 'pon':
+        bot.send_message(message.chat.id, '1. Разговоры о важном\n2. Право\n3. Русский язык\n4. География\n5. Право\n6. Химия\n7. Физическая культура\n8. Математика')
+    elif message.data == 'vto':
+        bot.send_message(message.chat.id, '1. Физика\n2. Родной язык(русский)\n3. Индивидуальный проект\n4. Математика\n5. Математика\n6. Литература\n7. Информатика/Английский язык')
+    elif message.data == 'sre':
+        bot.send_message(message.chat.id, '1.  Математика\n2. Экономика\n3. ОБЖ\n4. Английский язык\n5. Математика\n6. Экономика\n7. Литература\n8. Основы предпринимательской деятельносьти(1 раз в 2 недели)')
+    elif message.data == 'cht':
+        bot.send_message(message.chat.id, '1. Английский язык\n2. Математика\n3. Физика\n4. Обществознание\n5. Обществознание\n6. Литература\n7. Физическая культура\n8. Россия мои горизонты')
+    elif message.data == 'pyat':
+        bot.send_message(message.chat.id, '1. Нет урока\n2. История\n3. История\n4. Биология\n 5. Астрономия\n6. Физическая культура\n7. Анлийский язык/Информатика')
+    elif message.data == 'angl1':
+        markup4 = types.InlineKeyboardMarkup()
+        markup4.add(types.InlineKeyboardButton('Первая группа',callback_data='1'))
+        markup4.add(types.InlineKeyboardButton('Вторая группа',callback_data='2'))
+        bot.send_message(message.chat.id, 'Выберите группу по английскому', reply_markup=markup4)
+    elif message.data == 'astr1':
+        bot.send_message(message.chat.id,'Петров Антон Михайлович')
+    elif message.data == 'bio1':
+        bot.send_message(message.chat.id,'Ниязова Мария Сергеевна')
+    elif message.data == 'geo1':
+        bot.send_message(message.chat.id,'Золотарева Марина Анатольева')
+    elif message.data == 'ip1':
+        bot.send_message(message.chat.id,'Цыганок Юлия Васильевна')
+    elif message.data == 'infa1':
+        bot.send_message(message.chat.id,'Сафиуллин Руслан Фаилович')
+    elif message.data == 'history1':
+        bot.send_message(message.chat.id,'Цыганок Юлия Васильевна')
+    elif message.data == 'litra1':
+        bot.send_message(message.chat.id,'Бирюк Наталья Егоровна')
+    elif message.data == 'math1':
+        bot.send_message(message.chat.id,'Павлова Ксения Александровна')
+    elif message.data == 'obsch1':
+        bot.send_message(message.chat.id,'Цыганок Юлия Васильевна')
+    elif message.data == 'obzh1':
+        bot.send_message(message.chat.id,'Степанова Вероника Владимировна')
+    elif message.data == 'pravo1':
+        bot.send_message(message.chat.id,'Цыганок Юлия Васильевна')
+    elif message.data == 'yazik1':
+        bot.send_message(message.chat.id,'Бирюк Наталья Егоровна')
+    elif message.data == 'russki1':
+        bot.send_message(message.chat.id,'Бирюк Наталья Егоровна')
+    elif message.data == 'physics1':
+        bot.send_message(message.chat.id,'Артемьев Василий Ильич')
+    elif message.data == 'fizra1':
+        markup5 = types.InlineKeyboardMarkup()
+        markup5.add(types.InlineKeyboardButton('Мальчики',callback_data='muzh'))
+        markup5.add(types.InlineKeyboardButton('Девочки', callback_data='zhen'))
+        bot.send_message(message.chat.id, 'Выберите пол',reply_markup=markup5)
+    elif message.data == 'chemistry1':
+        bot.send_message(message.chat.id,'Селезнева Александра Тимофеевна')
+    elif message.data == 'eco1':
+        bot.send_message(message.chat.id,'Цыганок Юлия Васильевна')
+    elif message.data == 'astr2':
+        bot.send_message(message.chat.id, 'Кабинет 107')
+    elif message.data == 'bio2':
+        bot.send_message(message.chat.id, 'Кабинет 402')
+    elif message.data == 'geo2':
+        bot.send_message(message.chat.id, 'Кабинет 214')
+    elif message.data == 'ip2':
+        bot.send_message(message.chat.id, 'Кабинет 404')
+    elif message.data == 'infa2':
+        bot.send_message(message.chat.id, 'Кабинет 206')
+    elif message.data == 'history2':
+        bot.send_message(message.chat.id, 'Кабинет 404')
+    elif message.data == 'litra2':
+        bot.send_message(message.chat.id, 'Кабинет 303')
+    elif message.data == 'math2':
+        bot.send_message(message.chat.id, 'Кабинет 208')
+    elif message.data == 'obsch2':
+        bot.send_message(message.chat.id, 'Кабинет 404')
+    elif message.data == 'obzh2':
+        bot.send_message(message.chat.id, 'Кабинет 302')
+    elif message.data == 'pravo2':
+        bot.send_message(message.chat.id, 'Кабинет 404')
+    elif message.data == 'yazik2':
+        bot.send_message(message.chat.id, 'Кабинет 303')
+    elif message.data == 'russki2':
+        bot.send_message(message.chat.id, 'Кабинет 303')
+    elif message.data == 'physics2':
+        bot.send_message(message.chat.id, 'Кабинет 207')
+    elif message.data == 'fizra2':
+        bot.send_message(message.chat.id, 'Спортивный зал')
+    elif message.data == 'chemisry2':
+        bot.send_message(message.chat.id, 'Кабинет 107')
+    elif message.data == 'eco2':
+        bot.send_message(message.chat.id, 'Кабинет 404')
 
-# Flask stuff:
-instance/
-.webassets-cache
 
-# Scrapy stuff:
-.scrapy
 
-# Sphinx documentation
-docs/_build/
 
-# PyBuilder
-.pybuilder/
-target/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IPython
-profile_default/
-ipython_config.py
-
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
-
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
-
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-#poetry.lock
-
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#pdm.lock
-#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
-#   in version control.
-#   https://pdm.fming.dev/#use-with-ide
-.pdm.toml
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+bot.polling(non_stop = True)
